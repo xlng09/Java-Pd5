@@ -1,84 +1,119 @@
 
-     
-Challenge 1:
 
-Write a function "gpa" that takes in the GPA value and returns the calcuation : if it's over 90, return gpa*1.1, otherwise return the raw gpa.
-  
-  public static double gpa(double gpa) {
-    if (gpa > 90) {
-        return gpa * 1.1;
+Challenge 1:
+Write a function creditCardType that accepts the a credit card number (as a string) and returns back the type of credit card that is determined by the starting numbers:
+Starts with:
+4 - Visa
+34 or 37 - America Express
+36 - Diner Club
+51 or 55 - Mastercard
+6011 or 65 - Discovery
+String creditCardType(String number) {
+    if (number.startsWith("4")) {
+        return "Visa";
+    } else if (number.startsWith("34") || number.startsWith("37")) {
+        return "American Express";
+    } else if (number.startsWith("36")) {
+        return "Diner Club";
+    } else if (number.startsWith("51") || number.startsWith("55")) {
+        return "Mastercard";
+    } else if (number.startsWith("6011") || number.startsWith("65")) {
+        return "Discover";
     } else {
-        return gpa;
+        return "Unknown";
     }
 }
 Challenge 2:
-
-Write a function "isGraduating" that accepts the grade level and number of credits earned that returns the boolean value TRUE if a student is a Senior and has 44 or more credits, otherwise return FALSE. 
-
-In the init function:
-Display to console "Student is Graduating" or "Student is NOT Graduating" depending on the value return by the function.
-   public static boolean isGraduating(String gradeLevel, int credits) {
-    if (gradeLevel.equals("Senior") && credits >= 44) {
-        return true;
-    } else {
-        return false;
+Write a function pigLatin which accepts a word and return a new word made up by switch the fist letter to the end of the word and adding a "ay" after. Example: "pig"==> "igpay" Challenge 2:
+String pigLatin(String word) {
+    if (word.length() == 0) {
+        return word;
     }
+
+    return word.substring(1) + word.charAt(0) + "ay";
 }
 Challenge 3:
-BMI
-Write a function "BMI" that accepts a weight in pounds and 
-height in inches. Calculate the BMI (google the formula) and 
-return return the following:
-    BMI 18.4 or less return Underweight
-    BMI is 18.5 - 24.9	(inclusive) return Normal
-    BMI is 25.0 - 39.9	(inclusive) return Overweight
-    BMI is 40.0	or greater return  Obese  
-public static String BMI(double weight, double height) {
-    double bmi = (weight / (height * height)) * 703;
 
-    if (bmi <= 18.4) {
-        return "Underweight";
-    } else if (bmi <= 24.9) {
-        return "Normal";
-    } else if (bmi <= 39.9) {
-        return "Overweight";
+Write a function nycLocate that accepts a zip code (as a string) and returns where in NYC the zip code is by examing the first three numbers of the zip code:
+
+Manhattan starting with :100,101, 102
+Staten Island  : 103
+Bronx : 104
+Brooklyn : 112
+Queens : 113, 114, 111
+String nycLocate(String zip) {
+    String prefix = zip.substring(0, 3);
+
+    if (prefix.equals("100") ||
+        prefix.equals("101") ||
+        prefix.equals("102")) {
+        return "Manhattan";
+    } else if (prefix.equals("103")) {
+        return "Staten Island";
+    } else if (prefix.equals("104")) {
+        return "Bronx";
+    } else if (prefix.equals("112")) {
+        return "Brooklyn";
+    } else if (prefix.equals("113") ||
+               prefix.equals("114") ||
+               prefix.equals("111")) {
+        return "Queens";
     } else {
-        return "Obese";
+        return "Unknown";
     }
 }
+
 
 Challenge 4:
+Create a function getMonth that accepts a date in the form MM/DD/YYYY and returns the month: Example 07/21/2023 ==> "July"
+public String getMonth(String date) {
+    String month = date.substring(0, 2);
 
-Write a function "shippingCost" that accepts a weigth 
-in units of pounds and returns:
-      - 0.00, if 10 pounds or less,
-      - 5.00, if more than 10 pounds but 15 pounds 
-        or less,
-      - 10.00, if more than 15 pounds but 25 pounds 
-        or less,
-      - 10.00 Plus 2 cents per pound over 25 pound, 
-        if over 25 pounds.  
-
-public static double shippingCost(double weight) {
-    if (weight <= 10) {
-        return 0.00;
-    } else if (weight <= 15) {
-        return 5.00;
-    } else if (weight <= 25) {
-        return 10.00;
+    if (month.equals("01")) {
+        return "January";
+    } else if (month.equals("02")) {
+        return "February";
+    } else if (month.equals("03")) {
+        return "March";
+    } else if (month.equals("04")) {
+        return "April";
+    } else if (month.equals("05")) {
+        return "May";
+    } else if (month.equals("06")) {
+        return "June";
+    } else if (month.equals("07")) {
+        return "July";
+    } else if (month.equals("08")) {
+        return "August";
+    } else if (month.equals("09")) {
+        return "September";
+    } else if (month.equals("10")) {
+        return "October";
+    } else if (month.equals("11")) {
+        return "November";
+    } else if (month.equals("12")) {
+        return "December";
     } else {
-        return 10.00 + (weight - 25) * 0.02;
+        return "Invalid month";
     }
 }
-
 Challenge 5:
 
-Write a function "blueOrViolet" that accepts a light frequency in THz units and returns true for either blue frequence (600-670 THz) or violet frquence (700-750 THz), otherwise return false
-public static boolean blueOrViolet(double frequency) {
-    if ((frequency >= 600 && frequency <= 670) ||
-        (frequency >= 700 && frequency <= 750)) {
-        return true;
-    } else {
+Create a function validatePswd that accepts a password. The password must have 5 to 8 characters that are letters, numbers or any symbol except ^, *, (, ) 
+
+Return true if it's valid, otherwise return false.
+boolean validatePswd(String password) {
+    if (password.length() < 5 || password.length() > 8) {
         return false;
     }
+
+    for (int i = 0; i < password.length(); i++) {
+        char c = password.charAt(i);
+
+        if (c == '^' || c == '*' || c == '(' || c == ')') {
+            return false;
+        }
+    }
+
+    return true;
 }
